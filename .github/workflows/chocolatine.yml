@@ -23,7 +23,7 @@ jobs:
           check.sh $(pwd) $(pwd)
           Lines=$(cat coding-style-reports.log); \
           for Line in $Lines; \
-          do; \
+          do \
           ARG1=$(echo $Line | cut -d: -f1); \
           ARG2=$(echo $Line | cut -d: -f2); \
           ARG3=$(echo $Line | cut -d: -f3); \
