@@ -21,12 +21,11 @@ jobs:
       - name: Coding Style checker
         run: |
           check.sh $(pwd) $(pwd)
-          Lines=$(cat coding-style-reports.log); \
-          for Line in $Lines; \
+          while read Line; \
           do \
           ARG1=$(echo $Line | cut -d: -f1); \
           ARG2=$(echo $Line | cut -d: -f2); \
           ARG3=$(echo $Line | cut -d: -f3); \
           ARG4=$(echo $Line | cut -d: -f4); \
-          echo "::error file=$ARG1, line=ARG2, col=1:: $ARG3 $ARG4"; \
-          done
+          echo "::error file=$ARG1, line=$ARG2:: $ARG3 $ARG4"; \
+          done < coding-style-reports.log
