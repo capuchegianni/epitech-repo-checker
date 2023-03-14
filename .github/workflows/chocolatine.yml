@@ -18,14 +18,15 @@ jobs:
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
       steps:
-        - run: |
-          check.sh $(pwd) $(pwd)
-          Lines=$(cat coding-style-reports.log); \
-          for Line in $Lines; \
-          do; \
-          ARG1=$(echo $Line | cut -d: -f1); \
-          ARG2=$(echo $Line | cut -d: -f2); \
-          ARG3=$(echo $Line | cut -d: -f3); \
-          ARG4=$(echo $Line | cut -d: -f4); \
-          echo "::error file=$ARG1, line=ARG2, col=1:: $ARG3 $ARG4"; \
-          done
+        - name: Coding Style checker
+          run: |
+            check.sh $(pwd) $(pwd)
+            Lines=$(cat coding-style-reports.log); \
+            for Line in $Lines; \
+            do; \
+            ARG1=$(echo $Line | cut -d: -f1); \
+            ARG2=$(echo $Line | cut -d: -f2); \
+            ARG3=$(echo $Line | cut -d: -f3); \
+            ARG4=$(echo $Line | cut -d: -f4); \
+            echo "::error file=$ARG1, line=ARG2, col=1:: $ARG3 $ARG4"; \
+            done
