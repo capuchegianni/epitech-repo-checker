@@ -21,6 +21,7 @@ jobs:
       - name: Coding Style checker
         run: |
           check.sh $(pwd) $(pwd)
+          cat coding-style-reports.log
           while read Line; \
           do \
           ARG1=$(echo $Line | cut -d: -f1); \
