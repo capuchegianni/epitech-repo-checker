@@ -1,0 +1,6 @@
+./test.c:1: MAJOR:C-F6
+./test.c:1: MINOR:C-G1
+./test.c:1: MINOR:C-L4
+./test.c:2: MINOR:C-L3
+./test.c:3: MINOR:C-L2
+./test.c:4: INFO:C-A3

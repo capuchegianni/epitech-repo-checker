@@ -1,0 +1,30 @@
+name: Chocolatine
+
+on:
+  push:
+    branches-ignore:
+      - 'ga-ignore-**'
+  pull_request:
+    branches-ignore:
+      - 'ga-ignore-**'
+
+env:
+  MIRROR_URL: git@github.com:EpitechPromo2027/B-DOP-200-LIL-2-1-chocolatine-gianni.henriques.git
+  EXECUTABLES:
+
+jobs:
+  checking_coding_style:
+    runs-on: ubuntu-latest
+      container: ghcr.io/epitech/coding-style-checker:latest
+      steps:
+        - run: |
+          check.sh $(pwd) $(pwd)
+          Lines=$(cat coding-style-reports.log); \
+          for Line in $Lines; \
+          do; \
+          ARG1=$(echo $Line | cut -d: -f1); \
+          ARG2=$(echo $Line | cut -d: -f2); \
+          ARG3=$(echo $Line | cut -d: -f3); \
+          ARG4=$(echo $Line | cut -d: -f4); \
+          echo "::error file=$ARG1, line=ARG2, col=1:: $ARG3 $ARG4"; \
+          done
