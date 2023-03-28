@@ -25,4 +25,8 @@ fclean: clean
 re: fclean all
 	make clean
 
+tests_run:
+	make tests_run -sC giantman/
+	make tests_run -sC antman/
+
 .PHONY: all clean fclean re
