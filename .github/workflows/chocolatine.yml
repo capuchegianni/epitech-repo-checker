@@ -20,8 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Coding Style checker
         run: |
           check.sh $(pwd) $(pwd)
@@ -45,10 +43,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Compile the program
-        run: timeout 2m make
+        run: make
+        timeout-minutes: 2
       - name: Clean the useless files
         run: make clean
       - name: Check each executables
@@ -70,10 +67,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Run unit tests
-        run: timeout 2m make tests_run
+        run: make tests_run
+        timeout-minutes: 2
 
   push_to_mirror:
     needs: run_tests
@@ -84,5 +80,5 @@ jobs:
           fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
         with:
-          target_repo_url: $MIRROR_URL
+          target_repo_url: ${{ env.MIRROR_URL }}
           ssh_private_key: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
