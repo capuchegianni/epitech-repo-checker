@@ -37,4 +37,10 @@ fclean: clean
 re: fclean all
 	make clean
 
+unit_tests: re
+	gcc $(SRC) tests/ -lcriterion --coverage -L. -lmy -lcsfml
+
+tests_run: unit_tests
+	./$(NAME)
+
 .PHONY: all clean fclean re
