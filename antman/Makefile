@@ -38,7 +38,7 @@ re: fclean all
 	make clean
 
 unit_tests: re
-	gcc $(SRC) tests/ -lcriterion --coverage -L. -lmy -lcsfml
+	gcc $(SRC) ../tests/ -lcriterion --coverage -L../lib/ -lmy
 
 tests_run: unit_tests
 	./$(NAME)
