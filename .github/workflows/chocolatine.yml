@@ -10,7 +10,7 @@ on:
 
 env:
   MIRROR_URL: git@github.com:EpitechPromo2027/B-DOP-200-LIL-2-1-chocolatine-gianni.henriques.git
-  EXECUTABLES:
+  EXECUTABLES: "antman/antman,giantman/giantman"
 
 jobs:
   checking_coding_style:
@@ -36,6 +36,7 @@ jobs:
           fi
   
   check_program_compilation:
+    needs: checking_coding_style
     runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker:latest
@@ -46,3 +47,13 @@ jobs:
         run: timeout 2m make
       - name: Clean the useless files
         run: make clean
+      - name: Check each executables
+        run: |
+          IFS=','
+          for value in $EXECUTABLES; do
+            if [ -e $value ]; then
+              exit 0
+            else
+              exit 1
+            fi
+          done
