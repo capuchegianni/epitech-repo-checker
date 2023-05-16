@@ -1,16 +1,12 @@
-name: Chocolatine
+name: Project tester
 
 on:
   push:
     branches-ignore:
       - 'ga-ignore-**'
-  pull_request:
-    branches-ignore:
-      - 'ga-ignore-**'
 
 env:
-  MIRROR_URL: git@github.com:EpitechPromo2027/B-DOP-200-LIL-2-1-chocolatine-gianni.henriques.git
-  EXECUTABLES: "antman/antman,giantman/giantman"
+  EXECUTABLES: "binary-file"
 
 jobs:
   checking_coding_style:
@@ -34,9 +30,8 @@ jobs:
           if [ -s coding-style-reports.log ]; then
             exit 1
           fi
-  
+
   check_program_compilation:
-    needs: checking_coding_style
     runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker:latest
